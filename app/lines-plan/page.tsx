@@ -26,21 +26,19 @@ function BodyPlan() {
 
   // Build paths for each station
   const stationPaths: { path: string; isFwd: boolean; st: number }[] = stations.map((st, si) => {
+    const stIsFwd = si >= midIdx
     const points = waterlines.map((wl, wi) => {
       const hb = halfBreadths[si]?.[wi] ?? 0
-      const isFwd = si >= midIdx
-      const x = isFwd
+      const x = stIsFwd
         ? scaleX(hb, 0, maxHB, W / 2) + W / 2   // right half (fwd)
         : scaleX(-hb, -maxHB, 0, W / 2)           // left half (aft, mirrored)
       const y = scaleY(wl, 0, vessel.depth, H)
       return `${x.toFixed(1)},${y.toFixed(1)}`
     })
-    const keel = isFwd
-      ? `${(W / 2).toFixed(1)},${scaleY(0, 0, vessel.depth, H).toFixed(1)}`
-      : `${(W / 2).toFixed(1)},${scaleY(0, 0, vessel.depth, H).toFixed(1)}`
+    const keel = `${(W / 2).toFixed(1)},${scaleY(0, 0, vessel.depth, H).toFixed(1)}`
     return {
       path: `M ${keel} L ${points.join(" L ")}`,
-      isFwd: si >= midIdx,
+      isFwd: stIsFwd,
       st,
     }
   })
