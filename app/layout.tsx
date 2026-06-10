@@ -23,7 +23,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             alignItems: "center",
             justifyContent: "center",
             borderTop: "1px solid rgba(146,141,171,0.22)",
-            background: "#252236",
+            background: "#210e07",
             gap: 16,
           }}>
             <span style={{
@@ -34,7 +34,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             }}>
               © {new Date().getFullYear()} OffsetCalc — Designed &amp; Built by{" "}
               <span style={{
-                background: "linear-gradient(to right, #928DAB, #b8b4cc)",
+                background: "linear-gradient(to right, #e05555, #f5e6e0)",
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
                 backgroundClip: "text",

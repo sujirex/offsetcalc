@@ -19,8 +19,8 @@ export function Navbar() {
   return (
     <nav style={{
       height: "var(--nav-h)",
-      background: "rgba(31,28,44,0.97)",
-      borderBottom: "1px solid rgba(146,141,171,0.22)",
+      background: "rgba(25,10,5,0.97)",
+      borderBottom: "1px solid rgba(135,0,0,0.4)",
       backdropFilter: "blur(16px)",
       position: "sticky", top: 0, zIndex: 50,
       display: "flex", alignItems: "center",
@@ -34,15 +34,15 @@ export function Navbar() {
         <Link href="/" style={{ textDecoration: "none", display: "flex", alignItems: "center", gap: 10, flexShrink: 0, marginRight: 16 }}>
           <div style={{
             width: 32, height: 32, borderRadius: 8,
-            background: "linear-gradient(135deg, #928DAB, #1F1C2C)",
-            border: "1px solid rgba(146,141,171,0.4)",
+            background: "linear-gradient(135deg, #870000, #190a05)",
+            border: "1px solid rgba(135,0,0,0.5)",
             display: "flex", alignItems: "center", justifyContent: "center",
           }}>
             <Anchor size={16} color="#eeeaf6" />
           </div>
           <div>
-            <div style={{ fontWeight: 700, fontSize: "0.95rem", color: "#eeeaf6", lineHeight: 1.1, fontFamily: "Arial, sans-serif" }}>OffsetCalc</div>
-            <div style={{ fontSize: "0.6rem", color: "#928DAB", letterSpacing: "0.1em", lineHeight: 1, fontFamily: "Arial, sans-serif" }}>HULL DESIGN TOOL</div>
+            <div style={{ fontWeight: 700, fontSize: "0.95rem", color: "#f5e6e0", lineHeight: 1.1, fontFamily: "Arial, sans-serif" }}>OffsetCalc</div>
+            <div style={{ fontSize: "0.6rem", color: "#e05555", letterSpacing: "0.1em", lineHeight: 1, fontFamily: "Arial, sans-serif" }}>HULL DESIGN TOOL</div>
           </div>
         </Link>
 
@@ -58,9 +58,9 @@ export function Navbar() {
                 fontSize: 12,
                 fontWeight: 500,
                 fontFamily: "Arial, Helvetica, sans-serif",
-                color: active ? "#b8b4cc" : "#a09bba",
-                background: active ? "rgba(146,141,171,0.12)" : "transparent",
-                borderBottom: active ? "2px solid #928DAB" : "2px solid transparent",
+                color: active ? "#f5e6e0" : "#c4918a",
+                background: active ? "rgba(135,0,0,0.15)" : "transparent",
+                borderBottom: active ? "2px solid #870000" : "2px solid transparent",
                 transition: "all .12s",
               }}>
                 <Icon size={13} />
@@ -72,11 +72,11 @@ export function Navbar() {
 
         {/* Built by — desktop only */}
         <div className="nav-built" style={{ display: "flex", alignItems: "center", gap: 6, flexShrink: 0, marginLeft: 8 }}>
-          <span style={{ fontSize: 11, color: "rgba(146,141,171,0.5)", fontFamily: "Arial, sans-serif" }}>Built by</span>
+          <span style={{ fontSize: 11, color: "rgba(196,145,138,0.5)", fontFamily: "Arial, sans-serif" }}>Built by</span>
           <span style={{
             fontSize: 12, fontWeight: 600,
             fontFamily: "Arial, sans-serif",
-            background: "linear-gradient(to right, #928DAB, #b8b4cc)",
+            background: "linear-gradient(to right, #e05555, #f5e6e0)",
             WebkitBackgroundClip: "text",
             WebkitTextFillColor: "transparent",
             backgroundClip: "text",
@@ -114,8 +114,8 @@ export function Navbar() {
                 padding: "10px 12px", borderRadius: "var(--radius-sm)", marginBottom: 4,
                 textDecoration: "none", fontSize: 13, fontWeight: 500,
                 fontFamily: "Arial, Helvetica, sans-serif",
-                color: active ? "#b8b4cc" : "#a09bba",
-                background: active ? "rgba(146,141,171,0.12)" : "transparent",
+                color: active ? "#f5e6e0" : "#c4918a",
+                background: active ? "rgba(135,0,0,0.12)" : "transparent",
               }}>
                 <Icon size={15} /> {label}
               </Link>
