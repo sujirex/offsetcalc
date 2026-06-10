@@ -14,9 +14,34 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         <HullProvider>
           <Navbar />
-          <main style={{ minHeight: "calc(100vh - var(--nav-h))" }}>
+          <main style={{ minHeight: "calc(100vh - var(--nav-h) - 48px)" }}>
             {children}
           </main>
+          <footer style={{
+            height: 48,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            borderTop: "1px solid var(--border)",
+            background: "var(--navy-mid)",
+            gap: 16,
+          }}>
+            <span style={{
+              fontSize: 12,
+              fontFamily: "Arial, sans-serif",
+              color: "var(--text-muted)",
+              letterSpacing: "0.03em",
+            }}>
+              © {new Date().getFullYear()} OffsetCalc — Designed &amp; Built by{" "}
+              <span style={{
+                background: "linear-gradient(to right, #3CD3AD, #4CB8C4)",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                backgroundClip: "text",
+                fontWeight: 600,
+              }}>Suji Kumar</span>
+            </span>
+          </footer>
         </HullProvider>
       </body>
     </html>

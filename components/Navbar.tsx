@@ -19,8 +19,12 @@ export function Navbar() {
   return (
     <nav style={{
       height: "var(--nav-h)",
-      background: "rgba(6,16,31,0.96)",
+      background: "rgba(7,26,30,0.96)",
       borderBottom: "1px solid var(--border)",
+      borderTop: "2px solid transparent",
+      backgroundImage: "linear-gradient(rgba(7,26,30,0.96),rgba(7,26,30,0.96)), linear-gradient(to right,#3CD3AD,#4CB8C4)",
+      backgroundOrigin: "border-box",
+      backgroundClip: "padding-box, border-box",
       backdropFilter: "blur(16px)",
       position: "sticky", top: 0, zIndex: 50,
       display: "flex", alignItems: "center",
@@ -30,7 +34,7 @@ export function Navbar() {
         <Link href="/" style={{ textDecoration: "none", display: "flex", alignItems: "center", gap: 10, flexShrink: 0, marginRight: 16 }}>
           <div style={{
             width: 32, height: 32, borderRadius: 8,
-            background: "linear-gradient(135deg,#0066aa,#00b4dc)",
+            background: "linear-gradient(135deg,#3CD3AD,#4CB8C4)",
             display: "flex", alignItems: "center", justifyContent: "center",
           }}>
             <Anchor size={16} color="#fff" />
