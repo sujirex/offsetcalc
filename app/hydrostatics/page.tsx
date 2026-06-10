@@ -84,21 +84,26 @@ export default function HydrostaticsPage() {
   const { data } = useHull()
   const hydro = useMemo(() => calcHydrostatics(data), [data])
 
-  function fmt(v: number, dp = 2) { return isNaN(v) ? "—" : v.toFixed(dp) }
+  function fmt(v: number, dp = 2) { return isNaN(v) || !isFinite(v) ? "—" : v.toFixed(dp) }
+
+  const invalidDims = data.vessel.lbp <= 0 || data.vessel.beam <= 0 || data.vessel.draft <= 0
 
   const results = [
-    { label: "Waterplane Area (Aw)",     value: fmt(hydro.waterplaneArea),   unit: "m²",   desc: "Area of the waterplane at design draft" },
-    { label: "Displaced Volume (∇)",      value: fmt(hydro.displacedVolume),  unit: "m³",   desc: "Volume of hull below design waterline" },
-    { label: "Displacement (Δ)",          value: fmt(hydro.displacement, 1),  unit: "t",    desc: "Mass of water displaced (salt water 1.025 t/m³)" },
-    { label: "LCB from AP",               value: fmt(hydro.lcb),              unit: "m",    desc: "Longitudinal Centre of Buoyancy" },
-    { label: "LCF from AP",               value: fmt(hydro.lcf),              unit: "m",    desc: "Longitudinal Centre of Flotation" },
-    { label: "KB",                        value: fmt(hydro.kb),               unit: "m",    desc: "Height of Centre of Buoyancy above keel" },
-    { label: "BM",                        value: fmt(hydro.bm),               unit: "m",    desc: "Metacentric radius" },
-    { label: "KM",                        value: fmt(hydro.km),               unit: "m",    desc: "Height of Metacentre above keel" },
-    { label: "Block Coeff (Cb)",          value: fmt(hydro.cb, 3),            unit: "",     desc: "∇ / (L × B × T)" },
-    { label: "Waterplane Coeff (Cw)",     value: fmt(hydro.cw, 3),            unit: "",     desc: "Aw / (L × B)" },
-    { label: "Midship Coeff (Cm)",        value: fmt(hydro.cm, 3),            unit: "",     desc: "Am / (B × T)" },
-    { label: "Prismatic Coeff (Cp)",      value: fmt(hydro.cp, 3),            unit: "",     desc: "∇ / (Am × L)" },
+    { label: "Waterplane Area (Aw)",     value: fmt(hydro.waterplaneArea),      unit: "m²",   desc: "Area of the waterplane at design draft" },
+    { label: "Displaced Volume (∇)",      value: fmt(hydro.displacedVolume),     unit: "m³",   desc: "Volume of hull below design waterline" },
+    { label: "Displacement (Δ)",          value: fmt(hydro.displacement, 1),     unit: "t",    desc: "Salt water 1.025 t/m³" },
+    { label: "Displacement (Long Tons)",  value: fmt(hydro.displacementLT, 1),   unit: "LT",   desc: "1 LT = 1.01605 t — used in Indian Navy / IRS" },
+    { label: "TPC",                       value: fmt(hydro.tpc, 3),              unit: "t/cm", desc: "Tonnes Per Centimetre immersion — Aw × 1.025 / 100" },
+    { label: "FWA",                       value: fmt(hydro.fwa, 1),              unit: "mm",   desc: "Fresh Water Allowance — Δ / (4 × TPC)" },
+    { label: "LCB from AP",               value: fmt(hydro.lcb),                 unit: "m",    desc: "Longitudinal Centre of Buoyancy" },
+    { label: "LCF from AP",               value: fmt(hydro.lcf),                 unit: "m",    desc: "Longitudinal Centre of Flotation" },
+    { label: "KB",                        value: fmt(hydro.kb),                  unit: "m",    desc: "Height of Centre of Buoyancy above keel" },
+    { label: "BM",                        value: fmt(hydro.bm),                  unit: "m",    desc: "Metacentric radius" },
+    { label: "KM",                        value: fmt(hydro.km),                  unit: "m",    desc: "Height of Metacentre above keel" },
+    { label: "Block Coeff (Cb)",          value: fmt(hydro.cb, 3),               unit: "",     desc: "∇ / (L × B × T)" },
+    { label: "Waterplane Coeff (Cw)",     value: fmt(hydro.cw, 3),               unit: "",     desc: "Aw / (L × B)" },
+    { label: "Midship Coeff (Cm)",        value: fmt(hydro.cm, 3),               unit: "",     desc: "Am / (B × T)" },
+    { label: "Prismatic Coeff (Cp)",      value: fmt(hydro.cp, 3),               unit: "",     desc: "∇ / (Am × L)" },
   ]
 
   function exportCSV() {
@@ -131,6 +136,12 @@ export default function HydrostaticsPage() {
           <Download size={14} /> Export CSV
         </button>
       </div>
+
+      {invalidDims && (
+        <div style={{ background: "rgba(245,158,11,.1)", border: "1px solid rgba(245,158,11,.4)", borderRadius: "var(--radius-sm)", padding: "10px 14px", marginBottom: 16, color: "#f59e0b", fontSize: 12 }}>
+          ⚠ LBP, Beam or Draft is zero — please set vessel dimensions in the Offset Table page before calculating.
+        </div>
+      )}
 
       {/* Results table */}
       <div className="card" style={{ marginBottom: 18, padding: 0, overflow: "hidden" }}>

@@ -31,4 +31,7 @@ export interface Hydrostatics {
   bm: number                  // BM (m)
   km: number                  // KM (m)
   sectionAreas: number[]      // Sectional area at each station (m²)
+  tpc: number                  // Tonnes Per Centimetre immersion (t/cm)
+  fwa: number                  // Fresh Water Allowance (mm)
+  displacementLT: number       // Displacement in Long Tons (1 LT = 1.016 t)
 }

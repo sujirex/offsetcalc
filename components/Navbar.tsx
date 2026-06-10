@@ -2,7 +2,8 @@
 import { useState } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { Anchor, Table2, Layers, Box, Calculator, BookOpen, Menu, X } from "lucide-react"
+import { Anchor, Table2, Layers, Box, Calculator, BookOpen, Menu, X, Sun, Moon } from "lucide-react"
+import { useTheme } from "../context/ThemeContext"
 
 const LINKS = [
   { href: "/offset-table", label: "Offset Table",  icon: Table2 },
@@ -15,6 +16,7 @@ const LINKS = [
 export function Navbar() {
   const path = usePathname()
   const [open, setOpen] = useState(false)
+  const { theme, toggle } = useTheme()
 
   return (
     <nav style={{
@@ -69,6 +71,22 @@ export function Navbar() {
             )
           })}
         </div>
+
+        {/* Theme toggle */}
+        <button
+          onClick={toggle}
+          title={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
+          style={{
+            background: "none", border: "1px solid var(--border)",
+            borderRadius: "var(--radius-sm)", padding: "6px 8px",
+            cursor: "pointer", color: "var(--text-secondary)",
+            display: "flex", alignItems: "center",
+            transition: "border-color .15s",
+            flexShrink: 0,
+          }}
+        >
+          {theme === "dark" ? <Sun size={15} /> : <Moon size={15} />}
+        </button>
 
         {/* Built by — desktop only */}
         <div className="nav-built" style={{ display: "flex", alignItems: "center", gap: 6, flexShrink: 0, marginLeft: 8 }}>

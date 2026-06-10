@@ -44,6 +44,46 @@ export const SAMPLE_PATROL_CRAFT: OffsetData = {
   ],
 }
 
+// Sample: Indian IWT River Barge — typical Ganga/Brahmaputra inland waterway vessel
+// Flat-bottomed, near-rectangular, Cb ≈ 0.87
+export const SAMPLE_IWT_BARGE: OffsetData = {
+  vessel: {
+    name: "IWT River Barge",
+    lbp: 55,
+    beam: 10.5,
+    depth: 2.8,
+    draft: 1.8,
+    stationCount: 11,
+  },
+  stations: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+  waterlines: [0.0, 0.4, 0.8, 1.2, 1.6, 2.0],
+  // Flat-bottomed with raked bow and rounded stern — typical Indian river barge
+  halfBreadths: [
+    // Stn 0 — AP (stern, rounded)
+    [1.50, 3.20, 4.40, 4.90, 5.10, 5.20],
+    // Stn 1
+    [3.50, 4.60, 5.00, 5.15, 5.20, 5.22],
+    // Stn 2
+    [4.60, 5.00, 5.15, 5.20, 5.22, 5.25],
+    // Stn 3
+    [5.00, 5.15, 5.20, 5.24, 5.25, 5.25],
+    // Stn 4
+    [5.15, 5.22, 5.24, 5.25, 5.25, 5.25],
+    // Stn 5 — Midship (fully rectangular)
+    [5.25, 5.25, 5.25, 5.25, 5.25, 5.25],
+    // Stn 6
+    [5.15, 5.22, 5.24, 5.25, 5.25, 5.25],
+    // Stn 7
+    [4.90, 5.10, 5.18, 5.22, 5.24, 5.25],
+    // Stn 8
+    [4.20, 4.80, 5.00, 5.10, 5.15, 5.18],
+    // Stn 9
+    [2.80, 3.80, 4.30, 4.65, 4.80, 4.90],
+    // Stn 10 — FP (bow, raked)
+    [0.30, 0.90, 1.80, 2.60, 3.20, 3.70],
+  ],
+}
+
 // Sample: Simple Barge — uniform hull, easy for learning
 export const SAMPLE_BARGE: OffsetData = {
   vessel: {

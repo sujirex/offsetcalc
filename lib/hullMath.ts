@@ -191,10 +191,22 @@ export function calcHydrostatics(data: OffsetData): Hydrostatics {
   const cm = (beam * draft) > 0 ? am / (beam * draft) : 0
   const cp = (am * lbp) > 0 ? vol / (am * lbp) : 0
 
+  // TPC — Tonnes Per Centimetre immersion (salt water)
+  // TPC = Aw × 1.025 / 100
+  const tpc = awp * 1.025 / 100
+
+  // FWA — Fresh Water Allowance in millimetres
+  // FWA = Displacement(t) / (4 × TPC)
+  const fwa = tpc > 0 ? displacement / (4 * tpc) : 0
+
+  // Displacement in Long Tons (1 LT = 2240 lb = 1.01605 t)
+  const displacementLT = displacement / 1.01605
+
   return {
     waterplaneArea: awp,
     displacedVolume: vol,
     displacement,
+    displacementLT,
     lcb: lcb(data),
     lcf: lcf(data),
     cb,
@@ -205,5 +217,7 @@ export function calcHydrostatics(data: OffsetData): Hydrostatics {
     bm: bmVal,
     km: kbVal + bmVal,
     sectionAreas,
+    tpc,
+    fwa,
   }
 }

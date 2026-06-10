@@ -31,6 +31,33 @@
   --brand-grad: linear-gradient(to right, #190a05, #870000);
 }
 
+/* ── Light theme overrides ── */
+[data-theme="light"] {
+  --navy:        #fdf5f0;
+  --navy-mid:    #f5ede9;
+  --navy-card:   #ffffff;
+  --navy-raised: #ffe8e0;
+  --border:      rgba(135, 0, 0, 0.18);
+  --border-hover:rgba(135, 0, 0, 0.40);
+  --text-primary:   #1a0505;
+  --text-secondary: #5a2020;
+  --text-muted:     #9a6060;
+}
+[data-theme="light"] html,
+[data-theme="light"] body {
+  background: #fdf5f0;
+  color: #1a0505;
+}
+[data-theme="light"] .card {
+  box-shadow: 0 1px 6px rgba(135,0,0,0.08);
+}
+[data-theme="light"] .data-table th {
+  background: #f5ede9;
+}
+[data-theme="light"] ::-webkit-scrollbar-track {
+  background: #fdf5f0;
+}
+
 html, body {
   height: 100%;
   background: var(--navy);

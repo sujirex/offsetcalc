@@ -2,7 +2,7 @@
 import { Suspense, useEffect, useRef, useState } from "react"
 import { useSearchParams } from "next/navigation"
 import { useHull } from "../../context/HullContext"
-import { SAMPLE_PATROL_CRAFT, SAMPLE_BARGE } from "../../lib/sampleData"
+import { SAMPLE_PATROL_CRAFT, SAMPLE_BARGE, SAMPLE_IWT_BARGE } from "../../lib/sampleData"
 import { OffsetData } from "../../lib/types"
 import { Upload, Download, Plus, Trash2, RefreshCw, Info } from "lucide-react"
 import Papa from "papaparse"
@@ -130,6 +130,9 @@ function OffsetTableInner() {
           </button>
           <button className="btn btn-secondary" onClick={() => setData(SAMPLE_BARGE)}>
             <RefreshCw size={14} /> Barge
+          </button>
+          <button className="btn btn-secondary" onClick={() => setData(SAMPLE_IWT_BARGE)}>
+            <RefreshCw size={14} /> IWT Barge 🇮🇳
           </button>
           <button className="btn btn-secondary" onClick={() => fileRef.current?.click()}>
             <Upload size={14} /> Import CSV
