@@ -34,7 +34,6 @@ export function Navbar() {
         <Link href="/" style={{ textDecoration: "none", display: "flex", alignItems: "center", gap: 10, flexShrink: 0, marginRight: 16 }}>
           <div style={{
             width: 32, height: 32, borderRadius: 8,
-            background: "#928DAB",
             background: "linear-gradient(135deg, #928DAB, #1F1C2C)",
             border: "1px solid rgba(146,141,171,0.4)",
             display: "flex", alignItems: "center", justifyContent: "center",
