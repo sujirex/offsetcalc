@@ -89,6 +89,7 @@ function OffsetTableInner() {
   /* ── CSV Import ── */
   function importCSV(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0]; if (!file) return
+    if (file.size > 5 * 1024 * 1024) { flash("File too large — max 5 MB"); return }
     Papa.parse(file, {
       complete: (result) => {
         const rows = result.data as string[][]
