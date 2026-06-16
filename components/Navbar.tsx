@@ -21,8 +21,8 @@ export function Navbar() {
   return (
     <nav style={{
       height: "var(--nav-h)",
-      background: "rgba(25,10,5,0.97)",
-      borderBottom: "1px solid rgba(135,0,0,0.4)",
+      background: "rgba(2,13,13,0.97)",
+      borderBottom: "1px solid rgba(10,150,150,0.25)",
       backdropFilter: "blur(16px)",
       position: "sticky", top: 0, zIndex: 50,
       display: "flex", alignItems: "center",
@@ -36,15 +36,15 @@ export function Navbar() {
         <Link href="/" style={{ textDecoration: "none", display: "flex", alignItems: "center", gap: 10, flexShrink: 0, marginRight: 16 }}>
           <div style={{
             width: 32, height: 32, borderRadius: 8,
-            background: "linear-gradient(135deg, #870000, #190a05)",
-            border: "1px solid rgba(135,0,0,0.5)",
+            background: "linear-gradient(135deg, #0A9696, #0DC8C8)",
+            border: "1px solid rgba(10,150,150,0.40)",
             display: "flex", alignItems: "center", justifyContent: "center",
           }}>
             <Anchor size={16} color="#eeeaf6" />
           </div>
           <div>
-            <div style={{ fontWeight: 700, fontSize: "0.95rem", color: "#f5e6e0", lineHeight: 1.1, fontFamily: "Arial, sans-serif" }}>OffsetCalc</div>
-            <div style={{ fontSize: "0.6rem", color: "#e05555", letterSpacing: "0.1em", lineHeight: 1, fontFamily: "Arial, sans-serif" }}>HULL DESIGN TOOL</div>
+            <div style={{ fontWeight: 700, fontSize: "0.95rem", color: "var(--text-primary)", lineHeight: 1.1, fontFamily: "Arial, sans-serif" }}>OffsetCalc</div>
+            <div style={{ fontSize: "0.6rem", color: "var(--teal)", letterSpacing: "0.1em", lineHeight: 1, fontFamily: "Arial, sans-serif" }}>HULL DESIGN TOOL</div>
           </div>
         </Link>
 
@@ -60,9 +60,9 @@ export function Navbar() {
                 fontSize: 12,
                 fontWeight: 500,
                 fontFamily: "Arial, Helvetica, sans-serif",
-                color: active ? "#f5e6e0" : "#c4918a",
-                background: active ? "rgba(135,0,0,0.15)" : "transparent",
-                borderBottom: active ? "2px solid #870000" : "2px solid transparent",
+                color: active ? "var(--text-primary)" : "var(--text-muted)",
+                background: active ? "rgba(10,150,150,0.15)" : "transparent",
+                borderBottom: active ? "2px solid #0A9696" : "2px solid transparent",
                 transition: "all .12s",
               }}>
                 <Icon size={13} />
@@ -90,11 +90,11 @@ export function Navbar() {
 
         {/* Built by — desktop only */}
         <div className="nav-built" style={{ display: "flex", alignItems: "center", gap: 6, flexShrink: 0, marginLeft: 8 }}>
-          <span style={{ fontSize: 11, color: "rgba(196,145,138,0.5)", fontFamily: "Arial, sans-serif" }}>Built by</span>
+          <span style={{ fontSize: 11, color: "rgba(10,150,150,0.5)", fontFamily: "Arial, sans-serif" }}>Built by</span>
           <span style={{
             fontSize: 12, fontWeight: 600,
             fontFamily: "Arial, sans-serif",
-            background: "linear-gradient(to right, #e05555, #f5e6e0)",
+            background: "linear-gradient(90deg, #0A9696, #0DC8C8)",
             WebkitBackgroundClip: "text",
             WebkitTextFillColor: "transparent",
             backgroundClip: "text",
@@ -107,9 +107,9 @@ export function Navbar() {
           onClick={() => setOpen(o => !o)}
           style={{
             display: "none", marginLeft: "auto",
-            background: "none", border: "1px solid rgba(146,141,171,0.3)",
+            background: "none", border: "1px solid rgba(10,150,150,0.30)",
             borderRadius: "var(--radius-sm)", padding: "6px 10px",
-            cursor: "pointer", color: "#eeeaf6",
+            cursor: "pointer", color: "var(--text-primary)",
           }}
         >
           {open ? <X size={18} /> : <Menu size={18} />}
@@ -120,8 +120,8 @@ export function Navbar() {
       {open && (
         <div style={{
           position: "absolute", top: "var(--nav-h)", left: 0, right: 0,
-          background: "rgba(31,28,44,0.99)",
-          borderBottom: "1px solid rgba(146,141,171,0.22)",
+          background: "rgba(2,13,13,0.99)",
+          borderBottom: "1px solid rgba(10,150,150,0.22)",
           padding: "8px 16px 16px", zIndex: 49,
         }}>
           {LINKS.map(({ href, label, icon: Icon }) => {
@@ -132,15 +132,15 @@ export function Navbar() {
                 padding: "10px 12px", borderRadius: "var(--radius-sm)", marginBottom: 4,
                 textDecoration: "none", fontSize: 13, fontWeight: 500,
                 fontFamily: "Arial, Helvetica, sans-serif",
-                color: active ? "#f5e6e0" : "#c4918a",
-                background: active ? "rgba(135,0,0,0.12)" : "transparent",
+                color: active ? "var(--text-primary)" : "var(--text-muted)",
+                background: active ? "rgba(10,150,150,0.12)" : "transparent",
               }}>
                 <Icon size={15} /> {label}
               </Link>
             )
           })}
-          <div style={{ borderTop: "1px solid rgba(146,141,171,0.15)", marginTop: 8, paddingTop: 10, fontSize: 11, color: "rgba(146,141,171,0.5)", fontFamily: "Arial, sans-serif", textAlign: "center" }}>
-            Built by <span style={{ color: "#928DAB", fontWeight: 600 }}>Suji Kumar</span>
+          <div style={{ borderTop: "1px solid rgba(146,141,171,0.15)", marginTop: 8, paddingTop: 10, fontSize: 11, color: "rgba(10,150,150,0.5)", fontFamily: "Arial, sans-serif", textAlign: "center" }}>
+            Built by <span style={{ color: "#0DC8C8", fontWeight: 600 }}>Suji Kumar</span>
           </div>
         </div>
       )}
