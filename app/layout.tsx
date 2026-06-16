@@ -38,7 +38,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             }}>
               <span style={{
                 fontSize: 12,
-                fontFamily: "Arial, sans-serif",
+                fontFamily: "'Roboto', sans-serif",
                 color: "var(--text-muted)",
                 letterSpacing: "0.03em",
               }}>

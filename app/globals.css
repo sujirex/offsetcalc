@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -62,18 +62,18 @@ html, body {
   height: 100%;
   background: var(--navy);
   color: var(--text-primary);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Roboto', sans-serif;
   font-size: 12px;
   line-height: 1.6;
 }
 
 /* Typography scale */
-h1 { font-family: Arial, Helvetica, sans-serif; font-size: 22px; font-weight: 700; color: var(--text-primary); }
-h2 { font-family: Arial, Helvetica, sans-serif; font-size: 17px; font-weight: 600; color: var(--text-primary); }
-h3 { font-family: Arial, Helvetica, sans-serif; font-size: 15px; font-weight: 600; color: var(--text-primary); }
-h4 { font-family: Arial, Helvetica, sans-serif; font-size: 13px; font-weight: 600; color: var(--text-primary); }
-p  { font-family: Arial, Helvetica, sans-serif; font-size: 12px; color: var(--text-secondary); line-height: 1.6; }
-label { font-family: Arial, Helvetica, sans-serif; font-size: 11px; }
+h1 { font-family: 'Roboto', sans-serif; font-size: 22px; font-weight: 700; color: var(--text-primary); }
+h2 { font-family: 'Roboto', sans-serif; font-size: 17px; font-weight: 600; color: var(--text-primary); }
+h3 { font-family: 'Roboto', sans-serif; font-size: 15px; font-weight: 600; color: var(--text-primary); }
+h4 { font-family: 'Roboto', sans-serif; font-size: 13px; font-weight: 600; color: var(--text-primary); }
+p  { font-family: 'Roboto', sans-serif; font-size: 12px; color: var(--text-secondary); line-height: 1.6; }
+label { font-family: 'Roboto', sans-serif; font-size: 11px; }
 
 /* Scrollbar */
 ::-webkit-scrollbar { width: 6px; height: 6px; }
@@ -97,7 +97,7 @@ label { font-family: Arial, Helvetica, sans-serif; font-size: 11px; }
   border: none; cursor: pointer;
   font-size: 12px; font-weight: 500;
   transition: opacity .15s, transform .1s;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Roboto', sans-serif;
 }
 .btn:hover { opacity: 0.85; transform: translateY(-1px); }
 .btn:active { transform: translateY(0); }
@@ -119,13 +119,13 @@ label { font-family: Arial, Helvetica, sans-serif; font-size: 11px; }
   border-radius: var(--radius-sm); color: var(--text-primary);
   padding: 8px 12px; font-size: 12px; outline: none;
   width: 100%; transition: border-color .15s;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Roboto', sans-serif;
 }
 .input:focus { border-color: #870000; }
 .input::placeholder { color: var(--text-muted); }
 
 /* Table */
-.data-table { width: 100%; border-collapse: collapse; font-size: 12px; font-family: Arial, Helvetica, sans-serif; }
+.data-table { width: 100%; border-collapse: collapse; font-size: 12px; font-family: 'Roboto', sans-serif; }
 .data-table th {
   text-align: left; padding: 10px 14px;
   color: var(--text-muted); font-weight: 600;
@@ -144,7 +144,7 @@ label { font-family: Arial, Helvetica, sans-serif; font-size: 11px; }
   border-radius: var(--radius);
   padding: 16px 18px;
 }
-.stat-label { color: var(--text-muted); font-size: 11px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; margin-bottom: 4px; font-family: Arial, Helvetica, sans-serif; }
+.stat-label { color: var(--text-muted); font-size: 11px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; margin-bottom: 4px; font-family: 'Roboto', sans-serif; }
 .stat-value { font-size: 24px; font-weight: 700; line-height: 1.1; color: #e05555; }
 .stat-sub   { color: var(--text-muted); font-size: 11px; margin-top: 3px; }
 
@@ -174,11 +174,4 @@ label { font-family: Arial, Helvetica, sans-serif; font-size: 11px; }
 .divider { border: none; border-top: 1px solid var(--border); margin: 16px 0; }
 
 /* Page wrapper */
-.page-content { max-width: 1200px; margin: 0 auto; padding: 28px 24px; }
-
-/* Mobile */
-@media (max-width: 768px) {
-  .page-content { padding: 16px; }
-  .card { overflow-x: auto; }
-  .stat-value { font-size: 18px !important; }
-}
+.page-content { max-width: 1200px; margin: 0 auto; p
