@@ -7,6 +7,7 @@ import { ThemeProvider } from "../context/ThemeContext"
 export const metadata: Metadata = {
   title: "OffsetCalc — Hull Lines Plan & Offset Table",
   description: "Naval architecture tool for hull offset tables, lines plan visualisation, 3D hull view and hydrostatic calculations.",
+  authors: [{ name: "Suji Kumar C", url: "https://sujikumar.com" }],
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -43,13 +44,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 letterSpacing: "0.03em",
               }}>
                 © {new Date().getFullYear()} OffsetCalc — Designed &amp; Built by{" "}
-                <span style={{
+                <a href="https://sujikumar.com/" rel="author" title="Built by Suji Kumar C — Digital Maritime Engineer" style={{ textDecoration: "none" }}><span style={{
                   background: "linear-gradient(to right, #e05555, #f5e6e0)",
                   WebkitBackgroundClip: "text",
                   WebkitTextFillColor: "transparent",
                   backgroundClip: "text",
                   fontWeight: 600,
-                }}>Suji Kumar</span>
+                }}>Suji Kumar C</span></a>
               </span>
             </footer>
           </HullProvider>
