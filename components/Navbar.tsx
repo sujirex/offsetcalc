@@ -2,7 +2,7 @@
 import { useState } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { Anchor, Table2, Layers, Box, Calculator, BookOpen, Menu, X, Sun, Moon } from "lucide-react"
+import { Table2, Layers, Box, Calculator, BookOpen, Menu, X, Sun, Moon } from "lucide-react"
 import { useTheme } from "../context/ThemeContext"
 
 const LINKS = [
@@ -14,144 +14,63 @@ const LINKS = [
 ]
 
 export function Navbar() {
-  const path = usePathname()
+  const path = usePathname() || "/"
   const [open, setOpen] = useState(false)
   const { theme, toggle } = useTheme()
+  const isActive = (href: string) => path === href || path === href + "/" || path.startsWith(href + "/")
 
   return (
-    <nav style={{
-      height: "var(--nav-h)",
-      background: "rgba(2,13,13,0.97)",
-      borderBottom: "1px solid rgba(10,150,150,0.25)",
-      backdropFilter: "blur(16px)",
-      position: "sticky", top: 0, zIndex: 50,
-      display: "flex", alignItems: "center",
-    }}>
-      <div style={{
-        maxWidth: 1200, width: "100%", margin: "0 auto",
-        padding: "0 20px", display: "flex", alignItems: "center", gap: 8,
-      }}>
-
-        {/* Logo */}
-        <Link href="/" style={{ textDecoration: "none", display: "flex", alignItems: "center", gap: 10, flexShrink: 0, marginRight: 16 }}>
-          <div style={{
-            width: 32, height: 32, borderRadius: 8,
-            background: "linear-gradient(135deg, #0A9696, #0DC8C8)",
-            border: "1px solid rgba(10,150,150,0.40)",
-            display: "flex", alignItems: "center", justifyContent: "center",
-          }}>
-            <Anchor size={16} color="#eeeaf6" />
-          </div>
-          <div>
-            <div style={{ fontWeight: 700, fontSize: "0.95rem", color: "var(--text-primary)", lineHeight: 1.1, fontFamily: "Arial, sans-serif" }}>OffsetCalc</div>
-            <div style={{ fontSize: "0.6rem", color: "var(--teal)", letterSpacing: "0.1em", lineHeight: 1, fontFamily: "Arial, sans-serif" }}>HULL DESIGN TOOL</div>
-          </div>
+    <div className="nav-wrap">
+      <nav className="nav" aria-label="Main">
+        <Link href="/" className="nav-brand" onClick={() => setOpen(false)}>
+          <img src="/ss-emblem.svg" alt="SS emblem" width={36} height={36} />
+          <span>
+            <b>OffsetCalc</b>
+            <small>Hull design tool</small>
+          </span>
         </Link>
 
-        {/* Desktop nav links */}
-        <div className="nav-desktop" style={{ display: "flex", gap: 2, flex: 1 }}>
-          {LINKS.map(({ href, label, icon: Icon }) => {
-            const active = path === href || path.startsWith(href + "/")
-            return (
-              <Link key={href} href={href} style={{
-                display: "flex", alignItems: "center", gap: 6,
-                padding: "6px 12px", borderRadius: "var(--radius-sm)",
-                textDecoration: "none",
-                fontSize: 12,
-                fontWeight: 500,
-                fontFamily: "Arial, Helvetica, sans-serif",
-                color: active ? "var(--text-primary)" : "var(--text-muted)",
-                background: active ? "rgba(10,150,150,0.15)" : "transparent",
-                borderBottom: active ? "2px solid #0A9696" : "2px solid transparent",
-                transition: "all .12s",
-              }}>
-                <Icon size={13} />
-                {label}
-              </Link>
-            )
-          })}
+        <div className="nav-links">
+          {LINKS.map(({ href, label, icon: Icon }) => (
+            <Link key={href} href={href} className={`nav-link${isActive(href) ? " active" : ""}`} aria-current={isActive(href) ? "page" : undefined}>
+              <Icon size={14} />
+              {label}
+            </Link>
+          ))}
         </div>
 
-        {/* Theme toggle */}
         <button
+          type="button"
+          className="icon-btn"
           onClick={toggle}
+          aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
           title={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
-          style={{
-            background: "none", border: "1px solid var(--border)",
-            borderRadius: "var(--radius-sm)", padding: "6px 8px",
-            cursor: "pointer", color: "var(--text-secondary)",
-            display: "flex", alignItems: "center",
-            transition: "border-color .15s",
-            flexShrink: 0,
-          }}
+          style={{ marginLeft: "auto" }}
         >
-          {theme === "dark" ? <Sun size={15} /> : <Moon size={15} />}
+          {theme === "dark" ? <Sun size={16} /> : <Moon size={16} />}
         </button>
 
-        {/* Built by — desktop only */}
-        <div className="nav-built" style={{ display: "flex", alignItems: "center", gap: 6, flexShrink: 0, marginLeft: 8 }}>
-          <span style={{ fontSize: 11, color: "rgba(10,150,150,0.5)", fontFamily: "Arial, sans-serif" }}>Built by</span>
-          <span style={{
-            fontSize: 12, fontWeight: 600,
-            fontFamily: "Arial, sans-serif",
-            background: "linear-gradient(90deg, #0A9696, #0DC8C8)",
-            WebkitBackgroundClip: "text",
-            WebkitTextFillColor: "transparent",
-            backgroundClip: "text",
-          }}>Suji Kumar</span>
-        </div>
-
-        {/* Mobile hamburger */}
         <button
-          className="nav-mob-btn"
+          type="button"
+          className="icon-btn nav-mob-btn"
           onClick={() => setOpen(o => !o)}
-          style={{
-            display: "none", marginLeft: "auto",
-            background: "none", border: "1px solid rgba(10,150,150,0.30)",
-            borderRadius: "var(--radius-sm)", padding: "6px 10px",
-            cursor: "pointer", color: "var(--text-primary)",
-          }}
+          aria-label={open ? "Close menu" : "Open menu"}
+          aria-expanded={open}
+          style={{ marginLeft: 0 }}
         >
-          {open ? <X size={18} /> : <Menu size={18} />}
+          {open ? <X size={17} /> : <Menu size={17} />}
         </button>
-      </div>
+      </nav>
 
-      {/* Mobile dropdown */}
       {open && (
-        <div style={{
-          position: "absolute", top: "var(--nav-h)", left: 0, right: 0,
-          background: "rgba(2,13,13,0.99)",
-          borderBottom: "1px solid rgba(10,150,150,0.22)",
-          padding: "8px 16px 16px", zIndex: 49,
-        }}>
-          {LINKS.map(({ href, label, icon: Icon }) => {
-            const active = path === href
-            return (
-              <Link key={href} href={href} onClick={() => setOpen(false)} style={{
-                display: "flex", alignItems: "center", gap: 8,
-                padding: "10px 12px", borderRadius: "var(--radius-sm)", marginBottom: 4,
-                textDecoration: "none", fontSize: 13, fontWeight: 500,
-                fontFamily: "Arial, Helvetica, sans-serif",
-                color: active ? "var(--text-primary)" : "var(--text-muted)",
-                background: active ? "rgba(10,150,150,0.12)" : "transparent",
-              }}>
-                <Icon size={15} /> {label}
-              </Link>
-            )
-          })}
-          <div style={{ borderTop: "1px solid rgba(146,141,171,0.15)", marginTop: 8, paddingTop: 10, fontSize: 11, color: "rgba(10,150,150,0.5)", fontFamily: "Arial, sans-serif", textAlign: "center" }}>
-            Built by <span style={{ color: "#0DC8C8", fontWeight: 600 }}>Suji Kumar</span>
-          </div>
+        <div className="nav-menu">
+          {LINKS.map(({ href, label, icon: Icon }) => (
+            <Link key={href} href={href} onClick={() => setOpen(false)} className={`nav-link${isActive(href) ? " active" : ""}`}>
+              <Icon size={16} /> {label}
+            </Link>
+          ))}
         </div>
       )}
-
-      <style>{`
-        @media (max-width: 700px) {
-          .nav-desktop { display: none !important; }
-          .nav-built   { display: none !important; }
-          .nav-mob-btn { display: flex !important; }
-        }
-      `}</style>
-    </nav>
+    </div>
   )
 }

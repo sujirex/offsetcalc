@@ -42,23 +42,23 @@ function BonjeansChart() {
   const xTicks = stations.filter((_, i) => i % 2 === 0 || i === n)
 
   return (
-    <svg viewBox={`0 0 ${W} ${H}`} style={{ width: "100%", maxWidth: W }}>
+    <svg className="chart" viewBox={`0 0 ${W} ${H}`} style={{ width: "100%", maxWidth: 960, display: "block", margin: "0 auto" }}>
       {/* Y grid */}
       {yTicks.map(({ y, val }) => (
         <g key={val}>
-          <line x1={PAD_L} y1={y} x2={W - PAD_R} y2={y} stroke="rgba(0,180,220,.12)" strokeWidth="0.6" />
-          <text x={PAD_L - 6} y={y + 3} textAnchor="end" fontSize="9" fill="#445870">{val}</text>
+          <line x1={PAD_L} y1={y} x2={W - PAD_R} y2={y} stroke="color-mix(in srgb, var(--signal) 12%, transparent)" strokeWidth="0.6" />
+          <text x={PAD_L - 6} y={y + 3} textAnchor="end" fontSize="9" fill="var(--faint)">{val}</text>
         </g>
       ))}
 
       {/* Filled area */}
-      <path d={areaPath} fill="rgba(0,180,220,.12)" />
+      <path d={areaPath} fill="color-mix(in srgb, var(--signal) 12%, transparent)" />
       {/* Curve */}
-      <polyline points={points.join(" ")} fill="none" stroke="#00b4dc" strokeWidth="2" />
+      <polyline points={points.join(" ")} fill="none" stroke="var(--g1)" strokeWidth="2" />
 
       {/* Axes */}
-      <line x1={PAD_L} y1={PAD_T} x2={PAD_L} y2={H - PAD_B} stroke="rgba(0,180,220,.3)" strokeWidth="1" />
-      <line x1={PAD_L} y1={H - PAD_B} x2={W - PAD_R} y2={H - PAD_B} stroke="rgba(0,180,220,.3)" strokeWidth="1" />
+      <line x1={PAD_L} y1={PAD_T} x2={PAD_L} y2={H - PAD_B} stroke="color-mix(in srgb, var(--signal) 30%, transparent)" strokeWidth="1" />
+      <line x1={PAD_L} y1={H - PAD_B} x2={W - PAD_R} y2={H - PAD_B} stroke="color-mix(in srgb, var(--signal) 30%, transparent)" strokeWidth="1" />
 
       {/* X station labels */}
       {stations.map((st, si) => {
@@ -66,16 +66,16 @@ function BonjeansChart() {
         const x = PAD_L + (si / n) * iW
         return (
           <g key={si}>
-            <line x1={x} y1={H - PAD_B} x2={x} y2={H - PAD_B + 4} stroke="rgba(0,180,220,.3)" strokeWidth="0.8" />
-            <text x={x} y={H - PAD_B + 14} textAnchor="middle" fontSize="9" fill="#445870">{st}</text>
+            <line x1={x} y1={H - PAD_B} x2={x} y2={H - PAD_B + 4} stroke="color-mix(in srgb, var(--signal) 30%, transparent)" strokeWidth="0.8" />
+            <text x={x} y={H - PAD_B + 14} textAnchor="middle" fontSize="9" fill="var(--faint)">{st}</text>
           </g>
         )
       })}
 
       {/* Labels */}
-      <text x={PAD_L - 32} y={H / 2} textAnchor="middle" fontSize="9" fill="#7a9bbf" transform={`rotate(-90,${PAD_L - 32},${H / 2})`}>Sectional Area (m²)</text>
-      <text x={W / 2} y={H - 4} textAnchor="middle" fontSize="9" fill="#7a9bbf">Station</text>
-      <text x={W / 2} y={14} textAnchor="middle" fontSize="10" fontWeight="bold" fill="#e4edf8">BONJEAN CURVES — Sectional Areas</text>
+      <text x={PAD_L - 32} y={H / 2} textAnchor="middle" fontSize="9" fill="var(--muted)" transform={`rotate(-90,${PAD_L - 32},${H / 2})`}>Sectional Area (m²)</text>
+      <text x={W / 2} y={H - 4} textAnchor="middle" fontSize="9" fill="var(--muted)">Station</text>
+      <text x={W / 2} y={14} textAnchor="middle" fontSize="10" fontWeight="bold" fill="var(--ink)">BONJEAN CURVES — Sectional Areas</text>
     </svg>
   )
 }
@@ -127,7 +127,7 @@ export default function HydrostaticsPage() {
     <div className="page-content">
       <div className="section-header" style={{ marginBottom: 20 }}>
         <div>
-          <h1 style={{ fontSize: 22, fontWeight: 700 }}>Hydrostatics</h1>
+          <h1>Hydrostatics</h1>
           <p style={{ color: "var(--text-secondary)", fontSize: 13, marginTop: 2 }}>
             {data.vessel.name} — calculated by Simpson's Rule at T = {data.vessel.draft}m draft
           </p>
@@ -138,7 +138,7 @@ export default function HydrostaticsPage() {
       </div>
 
       {invalidDims && (
-        <div style={{ background: "rgba(245,158,11,.1)", border: "1px solid rgba(245,158,11,.4)", borderRadius: "var(--radius-sm)", padding: "10px 14px", marginBottom: 16, color: "#f59e0b", fontSize: 12 }}>
+        <div style={{ background: "color-mix(in srgb, var(--t-warn) 10%, transparent)", border: "1px solid color-mix(in srgb, var(--t-warn) 40%, transparent)", borderRadius: "var(--radius-sm)", padding: "10px 14px", marginBottom: 16, color: "var(--t-warn)", fontSize: 12 }}>
           ⚠ LBP, Beam or Draft is zero — please set vessel dimensions in the Offset Table page before calculating.
         </div>
       )}
@@ -162,7 +162,7 @@ export default function HydrostaticsPage() {
               {results.map((r, i) => (
                 <tr key={i}>
                   <td style={{ fontWeight: 500, color: "var(--text-primary)" }}>{r.label}</td>
-                  <td style={{ textAlign: "right", fontFamily: "JetBrains Mono, monospace", color: "var(--cyan)", fontWeight: 600 }}>{r.value}</td>
+                  <td style={{ textAlign: "right", fontFamily: "var(--mono)", color: "var(--cyan)", fontWeight: 600 }}>{r.value}</td>
                   <td style={{ color: "var(--text-muted)" }}>{r.unit}</td>
                   <td style={{ color: "var(--text-secondary)", fontSize: 12 }}>{r.desc}</td>
                 </tr>
@@ -177,17 +177,17 @@ export default function HydrostaticsPage() {
         <div style={{ fontWeight: 600, marginBottom: 14, fontSize: 14 }}>Vertical Stability Stack</div>
         <div style={{ display: "flex", flexDirection: "column", gap: 6, maxWidth: 400 }}>
           {[
-            { label: "KM", val: hydro.km,  color: "#00b4dc",  desc: "Height of Metacentre" },
-            { label: "BM", val: hydro.bm,  color: "#00d4aa",  desc: "Metacentric radius (offset)" },
-            { label: "KB", val: hydro.kb,  color: "#667db6",  desc: "Height of Centre of Buoyancy" },
-            { label: "K",  val: 0,         color: "#445870",  desc: "Keel (baseline)" },
+            { label: "KM", val: hydro.km,  color: "var(--g1)",  desc: "Height of Metacentre" },
+            { label: "BM", val: hydro.bm,  color: "var(--g3)",  desc: "Metacentric radius (offset)" },
+            { label: "KB", val: hydro.kb,  color: "var(--g2)",  desc: "Height of Centre of Buoyancy" },
+            { label: "K",  val: 0,         color: "var(--faint)",  desc: "Keel (baseline)" },
           ].map(({ label, val, color, desc }) => (
             <div key={label} style={{ display: "flex", alignItems: "center", gap: 10 }}>
-              <div style={{ width: 36, textAlign: "right", fontFamily: "JetBrains Mono, monospace", fontSize: 12, color, fontWeight: 700 }}>{label}</div>
+              <div style={{ width: 36, textAlign: "right", fontFamily: "var(--mono)", fontSize: 12, color, fontWeight: 700 }}>{label}</div>
               <div style={{ flex: 1, height: 6, background: "var(--navy-raised)", borderRadius: 3, overflow: "hidden" }}>
                 <div style={{ width: `${Math.min((val / (hydro.km || 1)) * 100, 100)}%`, height: "100%", background: color, borderRadius: 3 }} />
               </div>
-              <div style={{ width: 44, textAlign: "right", fontFamily: "JetBrains Mono, monospace", fontSize: 12, color: "var(--text-secondary)" }}>{val.toFixed(2)}m</div>
+              <div style={{ width: 44, textAlign: "right", fontFamily: "var(--mono)", fontSize: 12, color: "var(--text-secondary)" }}>{val.toFixed(2)}m</div>
               <div style={{ fontSize: 11, color: "var(--text-muted)", minWidth: 160 }}>{desc}</div>
             </div>
           ))}
@@ -236,12 +236,12 @@ export default function HydrostaticsPage() {
                 const pct = maxA > 0 ? (area / maxA) * 100 : 0
                 return (
                   <tr key={i}>
-                    <td style={{ fontFamily: "JetBrains Mono, monospace", color: "var(--cyan)", fontWeight: 600 }}>
+                    <td style={{ fontFamily: "var(--mono)", color: "var(--cyan)", fontWeight: 600 }}>
                       {st === 0 ? `${st} (AP)` : st === data.stations[data.stations.length - 1] ? `${st} (FP)` : st}
                     </td>
-                    <td style={{ textAlign: "right", fontFamily: "JetBrains Mono, monospace" }}>{fmt(area)}</td>
+                    <td style={{ textAlign: "right", fontFamily: "var(--mono)" }}>{fmt(area)}</td>
                     <td style={{ width: 200 }}>
-                      <div style={{ height: 8, width: `${pct}%`, background: "linear-gradient(90deg,#0066aa,#00b4dc)", borderRadius: 2 }} />
+                      <div style={{ height: 8, width: `${pct}%`, background: "linear-gradient(90deg,var(--g1),var(--g3))", borderRadius: 2 }} />
                     </td>
                   </tr>
                 )
@@ -251,7 +251,7 @@ export default function HydrostaticsPage() {
         </div>
       </div>
 
-      <div className="card" style={{ marginTop: 14, background: "rgba(0,180,220,.05)" }}>
+      <div className="card card-tint" style={{ marginTop: 14 }}>
         <div style={{ display: "flex", gap: 8, alignItems: "flex-start" }}>
           <Info size={14} color="var(--cyan)" style={{ flexShrink: 0, marginTop: 2 }} />
           <p style={{ fontSize: 12, color: "var(--text-secondary)", lineHeight: 1.6 }}>

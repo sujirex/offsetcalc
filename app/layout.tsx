@@ -1,8 +1,12 @@
-import type { Metadata } from "next"
+import type { Metadata, Viewport } from "next"
+import localFont from "next/font/local"
 import "./globals.css"
 import { Navbar } from "../components/Navbar"
 import { HullProvider } from "../context/HullContext"
 import { ThemeProvider } from "../context/ThemeContext"
+
+const geist = localFont({ src: "./fonts/Geist.woff2", variable: "--font-geist", weight: "100 900", display: "swap" })
+const geistMono = localFont({ src: "./fonts/GeistMono.woff2", variable: "--font-geist-mono", weight: "100 900", display: "swap" })
 
 export const metadata: Metadata = {
   title: "OffsetCalc — Hull Lines Plan & Offset Table",
@@ -10,14 +14,23 @@ export const metadata: Metadata = {
   authors: [{ name: "Suji Kumar C", url: "https://sujikumar.com" }],
 }
 
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#FBFBFD" },
+    { media: "(prefers-color-scheme: dark)", color: "#07080D" },
+  ],
+}
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" className={`${geist.variable} ${geistMono.variable}`} suppressHydrationWarning>
       <head>
-        {/* Prevent flash of wrong theme */}
+        {/* Saved choice wins, otherwise the device setting. Runs before first paint (no flash). */}
         <script dangerouslySetInnerHTML={{ __html: `
           (function(){
-            var t = localStorage.getItem('offsetcalc-theme') || 'dark';
+            var t = null;
+            try { t = localStorage.getItem('offsetcalc-theme'); } catch (e) {}
+            if (t !== 'light' && t !== 'dark') t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
             document.documentElement.setAttribute('data-theme', t);
           })();
         `}} />
@@ -26,32 +39,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <ThemeProvider>
           <HullProvider>
             <Navbar />
-            <main style={{ minHeight: "calc(100vh - var(--nav-h) - 48px)" }}>
+            <main style={{ flex: 1 }}>
               {children}
             </main>
-            <footer style={{
-              height: 48,
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              borderTop: "1px solid var(--border)",
-              background: "var(--navy-mid)",
-            }}>
-              <span style={{
-                fontSize: 12,
-                fontFamily: "'Roboto', sans-serif",
-                color: "var(--text-muted)",
-                letterSpacing: "0.03em",
-              }}>
-                © {new Date().getFullYear()} OffsetCalc — Designed &amp; Built by{" "}
-                <a href="https://sujikumar.com/" rel="author" title="Built by Suji Kumar C — Digital Maritime Engineer" style={{ textDecoration: "none" }}><span style={{
-                  background: "linear-gradient(to right, #e05555, #f5e6e0)",
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                  backgroundClip: "text",
-                  fontWeight: 600,
-                }}>Suji Kumar C</span></a>
-              </span>
+            <footer className="site-footer">
+              <a className="credit" href="https://sujikumar.com/" rel="author" title="Built by Suji Kumar C — Digital Maritime Engineer">
+                <img src="/ss-emblem.svg" alt="" width={20} height={20} />
+                <span>© {new Date().getFullYear()} OffsetCalc · Built by <b>Suji Kumar C</b> · sujikumar.com</span>
+              </a>
             </footer>
           </HullProvider>
         </ThemeProvider>

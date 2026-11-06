@@ -120,12 +120,12 @@ function OffsetTableInner() {
     <div className="page-content">
       <div className="section-header" style={{ marginBottom: 20 }}>
         <div>
-          <h1 style={{ fontSize: 22, fontWeight: 700 }}>Offset Table</h1>
+          <h1>Offset Table</h1>
           <p style={{ color: "var(--text-secondary)", fontSize: 13, marginTop: 2 }}>
             Half-breadths (metres) from centreline — Station rows × Waterline columns
           </p>
         </div>
-        <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+        <div className="actions">
           <button className="btn btn-secondary" onClick={() => setData(SAMPLE_PATROL_CRAFT)}>
             <RefreshCw size={14} /> Patrol Craft
           </button>
@@ -146,7 +146,7 @@ function OffsetTableInner() {
       </div>
 
       {msg && (
-        <div style={{ background: "rgba(0,180,220,.12)", border: "1px solid rgba(0,180,220,.3)", borderRadius: "var(--radius-sm)", padding: "8px 14px", marginBottom: 14, color: "var(--cyan)", fontSize: 13 }}>
+        <div style={{ background: "color-mix(in srgb, var(--signal) 12%, transparent)", border: "1px solid color-mix(in srgb, var(--signal) 30%, transparent)", borderRadius: "var(--radius-sm)", padding: "8px 14px", marginBottom: 14, color: "var(--cyan)", fontSize: 13 }}>
           {msg}
         </div>
       )}
@@ -217,15 +217,15 @@ function OffsetTableInner() {
             </thead>
             <tbody>
               {data.stations.map((st, si) => (
-                <tr key={si} style={{ borderBottom: "1px solid rgba(0,180,220,.06)" }}>
-                  <td style={{ padding: "6px 12px", color: "var(--cyan)", fontWeight: 600, background: "var(--navy)", fontFamily: "JetBrains Mono, monospace" }}>
+                <tr key={si} style={{ borderBottom: "1px solid color-mix(in srgb, var(--signal) 6%, transparent)" }}>
+                  <td style={{ padding: "6px 12px", color: "var(--cyan)", fontWeight: 600, background: "var(--navy)", fontFamily: "var(--mono)" }}>
                     {si === 0 ? `${st} (AP)` : si === data.stations.length - 1 ? `${st} (FP)` : si === Math.floor(data.stations.length / 2) ? `${st} (Mid)` : st}
                   </td>
                   {data.halfBreadths[si]?.map((hb, wi) => {
                     const pct = maxHalfBeam > 0 ? (hb / maxHalfBeam) * 100 : 0
                     const isOverBeam = hb > maxHalfBeam + 0.01
                     return (
-                      <td key={wi} style={{ padding: "4px 6px", borderLeft: "1px solid rgba(0,180,220,.06)" }}>
+                      <td key={wi} style={{ padding: "4px 6px", borderLeft: "1px solid color-mix(in srgb, var(--signal) 6%, transparent)" }}>
                         <input
                           type="number"
                           value={hb}
@@ -234,20 +234,20 @@ function OffsetTableInner() {
                           min="0"
                           style={{
                             width: "100%", textAlign: "center",
-                            background: isOverBeam ? "rgba(239,68,68,.1)" : `rgba(0,180,220,${pct * 0.002})`,
-                            border: `1px solid ${isOverBeam ? "rgba(239,68,68,.4)" : "transparent"}`,
+                            background: isOverBeam ? "color-mix(in srgb, var(--t-danger) 10%, transparent)" : `color-mix(in srgb, var(--signal) ${pct * 0.2}%, transparent)`,
+                            border: `1px solid ${isOverBeam ? "color-mix(in srgb, var(--t-danger) 40%, transparent)" : "transparent"}`,
                             borderRadius: 4, padding: "4px 6px",
                             color: "var(--text-primary)", fontSize: 12,
-                            fontFamily: "JetBrains Mono, monospace",
+                            fontFamily: "var(--mono)",
                             outline: "none",
                           }}
                           onFocus={e => e.target.style.borderColor = "var(--cyan)"}
-                          onBlur={e => e.target.style.borderColor = isOverBeam ? "rgba(239,68,68,.4)" : "transparent"}
+                          onBlur={e => e.target.style.borderColor = isOverBeam ? "color-mix(in srgb, var(--t-danger) 40%, transparent)" : "transparent"}
                         />
                       </td>
                     )
                   })}
-                  <td style={{ padding: "4px 6px", borderLeft: "1px solid rgba(0,180,220,.06)", textAlign: "center" }}>
+                  <td style={{ padding: "4px 6px", borderLeft: "1px solid color-mix(in srgb, var(--signal) 6%, transparent)", textAlign: "center" }}>
                     {data.stations.length > 2 && (
                       <button onClick={() => removeStation(si)} style={{ background: "none", border: "none", cursor: "pointer", color: "var(--text-muted)", padding: 2 }}>
                         <Trash2 size={12} />
@@ -266,7 +266,7 @@ function OffsetTableInner() {
             All values are half-breadths (metres from centreline). Max half-beam = {(data.vessel.beam / 2).toFixed(2)}m.
           </div>
           <div style={{ display: "flex", alignItems: "center", gap: 6, fontSize: 12, color: "var(--text-muted)" }}>
-            <span style={{ display: "inline-block", width: 14, height: 14, background: "rgba(239,68,68,.2)", border: "1px solid rgba(239,68,68,.4)", borderRadius: 2 }} />
+            <span style={{ display: "inline-block", width: 14, height: 14, background: "color-mix(in srgb, var(--t-danger) 20%, transparent)", border: "1px solid color-mix(in srgb, var(--t-danger) 40%, transparent)", borderRadius: 2 }} />
             Red = exceeds half-beam
           </div>
         </div>

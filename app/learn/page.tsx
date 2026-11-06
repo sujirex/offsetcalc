@@ -155,7 +155,7 @@ export default function LearnPage() {
       </div>
 
       {/* CTA */}
-      <div className="card" style={{ marginTop: 20, background: "var(--cyan-dim)", borderColor: "rgba(0,180,220,.3)", textAlign: "center", padding: "28px 20px" }}>
+      <div className="card" style={{ marginTop: 20, background: "var(--cyan-dim)", borderColor: "color-mix(in srgb, var(--signal) 30%, transparent)", textAlign: "center", padding: "28px 20px" }}>
         <h3 style={{ fontWeight: 700, marginBottom: 10 }}>Ready to try it?</h3>
         <p style={{ color: "var(--text-secondary)", fontSize: 13, marginBottom: 16 }}>
           Load a sample vessel and explore the lines plan and hydrostatics.

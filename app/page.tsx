@@ -1,6 +1,6 @@
 "use client"
 import Link from "next/link"
-import { Anchor, Table2, Layers, Box, Calculator, BookOpen, ArrowRight, CheckCircle } from "lucide-react"
+import { Table2, Layers, Box, Calculator, BookOpen, ArrowRight, CheckCircle } from "lucide-react"
 
 const FEATURES = [
   { icon: Table2,     title: "Offset Table Editor",  desc: "Enter half-breadths at stations × waterlines. Import/export CSV. Built-in sample vessels to get started immediately." },
@@ -17,27 +17,21 @@ const QUICK = [
 
 export default function Home() {
   return (
-    <div className="page-content">
+    <div className="aurora-clip"><div className="page-content">
       {/* Hero */}
-      <div style={{ textAlign: "center", padding: "48px 0 40px" }}>
-        <div style={{
-          width: 64, height: 64, borderRadius: 16,
-          background: "linear-gradient(135deg,#0066aa,#00b4dc)",
-          display: "flex", alignItems: "center", justifyContent: "center",
-          margin: "0 auto 20px",
-        }}>
-          <Anchor size={30} color="#fff" />
-        </div>
-        <h1 style={{ fontSize: 36, fontWeight: 800, marginBottom: 12 }}>
+      <div className="aurora" style={{ textAlign: "center", padding: "40px 0 44px" }}>
+        <img src="/ss-emblem.svg" alt="SS emblem" width={80} height={80}
+          style={{ display: "block", margin: "0 auto 22px", borderRadius: 22, boxShadow: "0 18px 50px -18px var(--g3)" }} />
+        <h1 style={{ fontSize: "clamp(36px, 7vw, 56px)", fontWeight: 650, letterSpacing: "-.045em", marginBottom: 14 }}>
           <span className="grad-text">OffsetCalc</span>
         </h1>
-        <p style={{ fontSize: 16, color: "var(--text-secondary)", maxWidth: 560, margin: "0 auto 32px", lineHeight: 1.7 }}>
+        <p style={{ fontSize: 16, color: "var(--text-secondary)", maxWidth: 560, margin: "0 auto 30px", lineHeight: 1.7 }}>
           Naval architecture tool for hull lines plans and offset tables.
           Enter your offsets, visualise the hull form, and calculate hydrostatics — all in the browser.
         </p>
-        <div style={{ display: "flex", gap: 12, justifyContent: "center", flexWrap: "wrap" }}>
+        <div style={{ display: "flex", gap: 10, justifyContent: "center", flexWrap: "wrap" }}>
           {QUICK.map(({ href, label, icon: Icon, primary }) => (
-            <Link key={href} href={href} className={`btn ${primary ? "btn-primary" : "btn-secondary"}`} style={{ fontSize: 14 }}>
+            <Link key={href} href={href} className={`btn ${primary ? "btn-primary" : "btn-secondary"}`} style={{ fontSize: 14, padding: "11px 18px" }}>
               <Icon size={15} /> {label} {primary && <ArrowRight size={14} />}
             </Link>
           ))}
@@ -50,10 +44,10 @@ export default function Home() {
           <div key={title} className="card">
             <div style={{
               width: 40, height: 40, borderRadius: 10,
-              background: "var(--cyan-dim)", border: "1px solid var(--border)",
+              background: "var(--inset)", border: "1px solid var(--border)",
               display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 14,
             }}>
-              <Icon size={18} color="var(--cyan)" />
+              <Icon size={18} color="var(--g3)" />
             </div>
             <div style={{ fontWeight: 600, marginBottom: 6 }}>{title}</div>
             <div style={{ color: "var(--text-secondary)", fontSize: 13, lineHeight: 1.6 }}>{desc}</div>
@@ -122,15 +116,9 @@ export default function Home() {
             { name: "Patrol Craft 40", dims: "40m × 7.2m × 2.0m draft", cb: "Cb ≈ 0.55", href: "/offset-table?sample=patrol", badge: "Realistic hull" },
             { name: "Box Barge 30",    dims: "30m × 8.0m × 1.5m draft", cb: "Cb ≈ 0.95", href: "/offset-table?sample=barge",  badge: "Learning example" },
           ].map(v => (
-            <Link key={v.name} href={v.href} style={{
-              textDecoration: "none",
-              background: "var(--navy)", border: "1px solid var(--border)",
-              borderRadius: "var(--radius-sm)", padding: "14px 16px",
-              display: "block", transition: "border-color .15s",
-            }}
-            onMouseEnter={e => (e.currentTarget.style.borderColor = "var(--cyan)")}
-            onMouseLeave={e => (e.currentTarget.style.borderColor = "var(--border)")}
-            >
+            <Link key={v.name} href={v.href} className="card card-link" style={{
+              background: "var(--inset)", boxShadow: "none", padding: "14px 16px", borderRadius: "var(--radius-sm)",
+            }}>
               <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 6 }}>
                 <span style={{ fontWeight: 600, fontSize: 13, color: "var(--text-primary)" }}>{v.name}</span>
                 <span className="badge badge-success" style={{ fontSize: 10 }}>{v.badge}</span>
@@ -154,11 +142,11 @@ export default function Home() {
             "Three.js 3D wireframe", "Mobile responsive",
           ].map(f => (
             <div key={f} style={{ display: "flex", alignItems: "center", gap: 6, color: "var(--text-secondary)", fontSize: 13 }}>
-              <CheckCircle size={14} color="var(--teal)" /> {f}
+              <CheckCircle size={14} color="var(--ok)" /> {f}
             </div>
           ))}
         </div>
       </div>
-    </div>
+    </div></div>
   )
 }

@@ -54,26 +54,26 @@ function BodyPlan() {
   const centreX = W / 2
 
   return (
-    <svg viewBox={`0 0 ${W} ${H}`} style={{ width: "100%", maxWidth: W }}>
+    <svg className="chart" viewBox={`0 0 ${W} ${H}`} style={{ width: "100%", maxWidth: 960, display: "block", margin: "0 auto" }}>
       {/* Grid: waterline horizontals */}
       {wlLines.map(({ y, wl }) => (
         <g key={wl}>
-          <line x1={PAD} y1={y} x2={W - PAD} y2={y} stroke="rgba(0,180,220,.15)" strokeWidth="0.5" />
-          <text x={PAD - 4} y={y + 3} textAnchor="end" fontSize="9" fill="#445870">{wl}m</text>
+          <line x1={PAD} y1={y} x2={W - PAD} y2={y} stroke="color-mix(in srgb, var(--signal) 15%, transparent)" strokeWidth="0.5" />
+          <text x={PAD - 4} y={y + 3} textAnchor="end" fontSize="9" fill="var(--faint)">{wl}m</text>
         </g>
       ))}
 
       {/* Design draft */}
-      <line x1={PAD} y1={draftY} x2={W - PAD} y2={draftY} stroke="rgba(0,220,150,.4)" strokeWidth="1" strokeDasharray="4,3" />
-      <text x={W - PAD + 2} y={draftY + 3} fontSize="8" fill="#00d4aa">DWL</text>
+      <line x1={PAD} y1={draftY} x2={W - PAD} y2={draftY} stroke="color-mix(in srgb, var(--ok) 40%, transparent)" strokeWidth="1" strokeDasharray="4,3" />
+      <text x={W - PAD + 2} y={draftY + 3} fontSize="8" fill="var(--ok)">DWL</text>
 
       {/* Centreline */}
-      <line x1={centreX} y1={PAD / 2} x2={centreX} y2={H - PAD + 8} stroke="rgba(0,180,220,.3)" strokeWidth="0.8" strokeDasharray="6,3" />
-      <text x={centreX} y={H - PAD + 18} textAnchor="middle" fontSize="9" fill="#445870">CL</text>
+      <line x1={centreX} y1={PAD / 2} x2={centreX} y2={H - PAD + 8} stroke="color-mix(in srgb, var(--signal) 30%, transparent)" strokeWidth="0.8" strokeDasharray="6,3" />
+      <text x={centreX} y={H - PAD + 18} textAnchor="middle" fontSize="9" fill="var(--faint)">CL</text>
 
       {/* Baseline */}
-      <line x1={PAD} y1={H - PAD} x2={W - PAD} y2={H - PAD} stroke="rgba(0,180,220,.4)" strokeWidth="1" />
-      <text x={PAD} y={H - PAD + 14} fontSize="8" fill="#445870">Base Line</text>
+      <line x1={PAD} y1={H - PAD} x2={W - PAD} y2={H - PAD} stroke="color-mix(in srgb, var(--signal) 40%, transparent)" strokeWidth="1" />
+      <text x={PAD} y={H - PAD + 14} fontSize="8" fill="var(--faint)">Base Line</text>
 
       {/* Station curves */}
       {stationPaths.map(({ path, isFwd, st }, i) => (
@@ -81,16 +81,16 @@ function BodyPlan() {
           key={i}
           d={path}
           fill="none"
-          stroke={isFwd ? "#00b4dc" : "#667db6"}
+          stroke={isFwd ? "var(--g1)" : "var(--g3)"}
           strokeWidth={st === stations[midIdx] ? 1.8 : 1.2}
           opacity={0.85}
         />
       ))}
 
       {/* Labels */}
-      <text x={PAD + 4} y={PAD - 6} fontSize="9" fill="#667db6">← AFT BODY</text>
-      <text x={W - PAD - 4} y={PAD - 6} fontSize="9" fill="#00b4dc" textAnchor="end">FWD BODY →</text>
-      <text x={centreX} y={14} textAnchor="middle" fontSize="10" fontWeight="bold" fill="#e4edf8">BODY PLAN</text>
+      <text x={PAD + 4} y={PAD - 6} fontSize="9" fill="var(--g3)">← AFT BODY</text>
+      <text x={W - PAD - 4} y={PAD - 6} fontSize="9" fill="var(--g1)" textAnchor="end">FWD BODY →</text>
+      <text x={centreX} y={14} textAnchor="middle" fontSize="10" fontWeight="bold" fill="var(--ink)">BODY PLAN</text>
     </svg>
   )
 }
@@ -132,41 +132,41 @@ function SheerPlan() {
   const fpX = stationLines[stationLines.length - 1]
 
   return (
-    <svg viewBox={`0 0 ${W} ${H}`} style={{ width: "100%", maxWidth: W }}>
+    <svg className="chart" viewBox={`0 0 ${W} ${H}`} style={{ width: "100%", maxWidth: 960, display: "block", margin: "0 auto" }}>
       {/* Waterline horizontals */}
       {wlLines.map(({ y, wl }) => (
         <g key={wl}>
-          <line x1={apX} y1={y} x2={fpX} y2={y} stroke="rgba(0,180,220,.25)" strokeWidth="0.8" />
-          <text x={apX - 4} y={y + 3} textAnchor="end" fontSize="9" fill="#445870">{wl}m</text>
+          <line x1={apX} y1={y} x2={fpX} y2={y} stroke="color-mix(in srgb, var(--signal) 25%, transparent)" strokeWidth="0.8" />
+          <text x={apX - 4} y={y + 3} textAnchor="end" fontSize="9" fill="var(--faint)">{wl}m</text>
         </g>
       ))}
 
       {/* Design draft */}
-      <line x1={apX} y1={draftY} x2={fpX} y2={draftY} stroke="rgba(0,220,150,.5)" strokeWidth="1.2" strokeDasharray="5,3" />
-      <text x={fpX + 3} y={draftY + 3} fontSize="8" fill="#00d4aa">DWL</text>
+      <line x1={apX} y1={draftY} x2={fpX} y2={draftY} stroke="color-mix(in srgb, var(--ok) 50%, transparent)" strokeWidth="1.2" strokeDasharray="5,3" />
+      <text x={fpX + 3} y={draftY + 3} fontSize="8" fill="var(--ok)">DWL</text>
 
       {/* Station verticals */}
       {stationLines.map((x, si) => (
         <g key={si}>
-          <line x1={x} y1={deckY - 4} x2={x} y2={baseY + 4} stroke="rgba(0,180,220,.18)" strokeWidth="0.6" />
-          <text x={x} y={baseY + 14} textAnchor="middle" fontSize="8" fill="#445870">{stations[si]}</text>
+          <line x1={x} y1={deckY - 4} x2={x} y2={baseY + 4} stroke="color-mix(in srgb, var(--signal) 18%, transparent)" strokeWidth="0.6" />
+          <text x={x} y={baseY + 14} textAnchor="middle" fontSize="8" fill="var(--faint)">{stations[si]}</text>
         </g>
       ))}
 
       {/* Hull profile: baseline + deckline + AP + FP */}
-      <line x1={apX} y1={baseY} x2={fpX} y2={baseY} stroke="#00b4dc" strokeWidth="1.5" />
-      <line x1={apX} y1={deckY} x2={fpX} y2={deckY} stroke="#00b4dc" strokeWidth="1.5" />
-      <line x1={apX} y1={deckY} x2={apX} y2={baseY} stroke="#00b4dc" strokeWidth="1.2" />
-      <line x1={fpX} y1={deckY} x2={fpX} y2={baseY} stroke="#00b4dc" strokeWidth="1.2" />
+      <line x1={apX} y1={baseY} x2={fpX} y2={baseY} stroke="var(--g1)" strokeWidth="1.5" />
+      <line x1={apX} y1={deckY} x2={fpX} y2={deckY} stroke="var(--g1)" strokeWidth="1.5" />
+      <line x1={apX} y1={deckY} x2={apX} y2={baseY} stroke="var(--g1)" strokeWidth="1.2" />
+      <line x1={fpX} y1={deckY} x2={fpX} y2={baseY} stroke="var(--g1)" strokeWidth="1.2" />
 
       {/* Dimension labels */}
-      <text x={apX} y={H - 8} fontSize="9" fill="#00b4dc" textAnchor="middle">AP</text>
-      <text x={fpX} y={H - 8} fontSize="9" fill="#00b4dc" textAnchor="middle">FP</text>
-      <text x={(apX + fpX) / 2} y={14} textAnchor="middle" fontSize="10" fontWeight="bold" fill="#e4edf8">SHEER PLAN (PROFILE)</text>
+      <text x={apX} y={H - 8} fontSize="9" fill="var(--g1)" textAnchor="middle">AP</text>
+      <text x={fpX} y={H - 8} fontSize="9" fill="var(--g1)" textAnchor="middle">FP</text>
+      <text x={(apX + fpX) / 2} y={14} textAnchor="middle" fontSize="10" fontWeight="bold" fill="var(--ink)">SHEER PLAN (PROFILE)</text>
 
       {/* LBP arrow */}
-      <line x1={apX} y1={H - PAD / 2} x2={fpX} y2={H - PAD / 2} stroke="#445870" strokeWidth="0.8" markerEnd="url(#arr)" />
-      <text x={(apX + fpX) / 2} y={H - PAD / 2 - 3} textAnchor="middle" fontSize="9" fill="#445870">LBP = {vessel.lbp}m</text>
+      <line x1={apX} y1={H - PAD / 2} x2={fpX} y2={H - PAD / 2} stroke="var(--faint)" strokeWidth="0.8" markerEnd="url(#arr)" />
+      <text x={(apX + fpX) / 2} y={H - PAD / 2 - 3} textAnchor="middle" fontSize="9" fill="var(--faint)">LBP = {vessel.lbp}m</text>
     </svg>
   )
 }
@@ -181,7 +181,7 @@ function HalfBreadthPlan() {
   const stationSpacing = vessel.lbp / n
   const maxHB = vessel.beam / 2
 
-  const wlColors = ["#00b4dc", "#00c8dc", "#00d4aa", "#22c55e", "#f59e0b", "#ef4444"]
+  const wlColors = ["var(--g1)", "var(--g2)", "var(--g3)", "var(--g4)", "var(--spark)", "var(--t-danger)"]
 
   // Waterline curves: for each WL, draw a polyline of (stationX, halfBreadthY)
   const wlPaths = waterlines.map((wl, wi) => {
@@ -203,22 +203,22 @@ function HalfBreadthPlan() {
   const stationLines = stations.map((_, si) => scaleX(si * stationSpacing, 0, vessel.lbp, W))
 
   return (
-    <svg viewBox={`0 0 ${W} ${H}`} style={{ width: "100%", maxWidth: W }}>
+    <svg className="chart" viewBox={`0 0 ${W} ${H}`} style={{ width: "100%", maxWidth: 960, display: "block", margin: "0 auto" }}>
       {/* Station grid */}
       {stationLines.map((x, si) => (
         <g key={si}>
-          <line x1={x} y1={PAD / 2} x2={x} y2={clY} stroke="rgba(0,180,220,.15)" strokeWidth="0.5" />
-          <text x={x} y={clY + 12} textAnchor="middle" fontSize="8" fill="#445870">{stations[si]}</text>
+          <line x1={x} y1={PAD / 2} x2={x} y2={clY} stroke="color-mix(in srgb, var(--signal) 15%, transparent)" strokeWidth="0.5" />
+          <text x={x} y={clY + 12} textAnchor="middle" fontSize="8" fill="var(--faint)">{stations[si]}</text>
         </g>
       ))}
 
       {/* Centreline */}
-      <line x1={apX} y1={clY} x2={fpX} y2={clY} stroke="rgba(0,180,220,.35)" strokeWidth="0.8" strokeDasharray="5,3" />
-      <text x={apX - 4} y={clY + 3} textAnchor="end" fontSize="9" fill="#445870">CL</text>
+      <line x1={apX} y1={clY} x2={fpX} y2={clY} stroke="color-mix(in srgb, var(--signal) 35%, transparent)" strokeWidth="0.8" strokeDasharray="5,3" />
+      <text x={apX - 4} y={clY + 3} textAnchor="end" fontSize="9" fill="var(--faint)">CL</text>
 
       {/* Max beam line */}
-      <line x1={apX} y1={maxY} x2={fpX} y2={maxY} stroke="rgba(102,125,182,.2)" strokeWidth="0.5" strokeDasharray="3,3" />
-      <text x={apX - 4} y={maxY + 3} textAnchor="end" fontSize="9" fill="#445870">{maxHB}m</text>
+      <line x1={apX} y1={maxY} x2={fpX} y2={maxY} stroke="color-mix(in srgb, var(--g3) 20%, transparent)" strokeWidth="0.5" strokeDasharray="3,3" />
+      <text x={apX - 4} y={maxY + 3} textAnchor="end" fontSize="9" fill="var(--faint)">{maxHB}m</text>
 
       {/* Waterline curves */}
       {wlPaths.map(({ path, wl, color }, i) => (
@@ -229,12 +229,12 @@ function HalfBreadthPlan() {
       ))}
 
       {/* AP / FP */}
-      <line x1={apX} y1={PAD / 2} x2={apX} y2={clY} stroke="#00b4dc" strokeWidth="1.2" />
-      <line x1={fpX} y1={PAD / 2} x2={fpX} y2={clY} stroke="#00b4dc" strokeWidth="1.2" />
-      <text x={apX} y={H - 8} textAnchor="middle" fontSize="9" fill="#00b4dc">AP</text>
-      <text x={fpX} y={H - 8} textAnchor="middle" fontSize="9" fill="#00b4dc">FP</text>
+      <line x1={apX} y1={PAD / 2} x2={apX} y2={clY} stroke="var(--g1)" strokeWidth="1.2" />
+      <line x1={fpX} y1={PAD / 2} x2={fpX} y2={clY} stroke="var(--g1)" strokeWidth="1.2" />
+      <text x={apX} y={H - 8} textAnchor="middle" fontSize="9" fill="var(--g1)">AP</text>
+      <text x={fpX} y={H - 8} textAnchor="middle" fontSize="9" fill="var(--g1)">FP</text>
 
-      <text x={(apX + fpX) / 2} y={14} textAnchor="middle" fontSize="10" fontWeight="bold" fill="#e4edf8">HALF-BREADTH PLAN</text>
+      <text x={(apX + fpX) / 2} y={14} textAnchor="middle" fontSize="10" fontWeight="bold" fill="var(--ink)">HALF-BREADTH PLAN</text>
     </svg>
   )
 }
@@ -251,7 +251,7 @@ export default function LinesPlanPage() {
     <div className="page-content">
       <div className="section-header" style={{ marginBottom: 20 }}>
         <div>
-          <h1 style={{ fontSize: 22, fontWeight: 700 }}>Lines Plan</h1>
+          <h1>Lines Plan</h1>
           <p style={{ color: "var(--text-secondary)", fontSize: 13, marginTop: 2 }}>
             {data.vessel.name} — LBP {data.vessel.lbp}m × B {data.vessel.beam}m × T {data.vessel.draft}m
           </p>
@@ -267,8 +267,8 @@ export default function LinesPlanPage() {
           <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 12 }}>
             <div style={{ fontWeight: 600, fontSize: 14 }}>Body Plan</div>
             <span style={{ fontSize: 12, color: "var(--text-muted)" }}>
-              <span style={{ color: "#00b4dc" }}>───</span> Forward &nbsp;
-              <span style={{ color: "#667db6" }}>───</span> Aft
+              <span style={{ color: "var(--g1)" }}>───</span> Forward &nbsp;
+              <span style={{ color: "var(--g3)" }}>───</span> Aft
             </span>
           </div>
           <BodyPlan />
@@ -286,7 +286,7 @@ export default function LinesPlanPage() {
             <div style={{ fontWeight: 600, fontSize: 14 }}>Half-Breadth Plan</div>
             <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
               {data.waterlines.map((wl, i) => {
-                const colors = ["#00b4dc","#00c8dc","#00d4aa","#22c55e","#f59e0b","#ef4444"]
+                const colors = ["var(--g1)","var(--g2)","var(--g3)","var(--g4)","var(--spark)","var(--t-danger)"]
                 return (
                   <span key={wl} style={{ fontSize: 11, color: colors[i % colors.length] }}>─ WL {wl}m</span>
                 )
@@ -298,7 +298,7 @@ export default function LinesPlanPage() {
       </div>
 
       {/* Info */}
-      <div className="card" style={{ marginTop: 16, background: "rgba(0,180,220,.05)" }}>
+      <div className="card card-tint" style={{ marginTop: 16 }}>
         <div style={{ display: "flex", gap: 8, alignItems: "flex-start" }}>
           <Info size={14} color="var(--cyan)" style={{ flexShrink: 0, marginTop: 2 }} />
           <p style={{ fontSize: 12, color: "var(--text-secondary)", lineHeight: 1.6 }}>
